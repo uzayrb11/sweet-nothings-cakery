@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sweet Nothings Cakery · Cookies, brownie bites and slabs</title>
+  <meta name="description" content="Freshly baked chocolate chip, double chocolate and red velvet cookies, cookie bites, brownie bites and slabs, made at home by Nasreen. Order on WhatsApp.">
+  <meta name="theme-color" content="#FEF2F2">
+  <meta property="og:title" content="Sweet Nothings Cakery">
+  <meta property="og:description" content="Cookies, cookie bites, brownie bites and slabs, made at home by Nasreen. Order on WhatsApp.">
+  <meta property="og:image" content="assets/img/choc-chip.jpg">
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="apple-touch-icon" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&family=DM+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#menu">Skip to the menu</a>
+
+  <header class="site-header">
+    <a href="#top" class="brand" aria-label="Sweet Nothings Cakery, back to the top">
+      <img src="assets/img/logo.png" alt="Sweet Nothings Cakery" width="128" height="64">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#menu">Menu</a>
+      <a href="#how-to-order">How to order</a>
+      <a href="#nasreen">Meet Nasreen</a>
+    </nav>
+    <a class="btn btn--dark btn--small" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order now</a>
+  </header>
+
+  <main id="top">
+    <!-- Scroll to bake: each scene is pinned while its clip plays forward with the scroll. -->
+    <div class="bake" aria-label="How a Sweet Nothings cookie is made">
+      <ol class="bake__rail" aria-hidden="true"></ol>
+
+      <section class="scene scene--hero" data-scene>
+        <div class="scene__pin">
+          <div class="scene__text">
+            <p class="scene__eyebrow">Sweet Nothings Cakery</p>
+            <h1 class="scene__title">Let's bake.</h1>
+            <p class="scene__line">Scroll to start.</p>
+          </div>
+          <div class="scene__media">
+            <img src="assets/img/bowl.png" alt="An empty pink mixing bowl" width="1040" height="618">
+          </div>
+          <div class="scene__cue" aria-hidden="true"><span></span>Scroll</div>
+        </div>
+      </section>
+
+      <section class="scene scene--flip" data-scene>
+        <div class="scene__pin">
+          <div class="scene__text">
+            <p class="scene__num">02</p>
+            <h2 class="scene__title">Butter &amp; sugar.</h2>
+            <p class="scene__line">Nothing but sweet things.</p>
+          </div>
+          <div class="scene__media">
+            <video src="assets/video/butter.mp4" poster="assets/video/butter-poster.jpg" muted playsinline preload="auto" aria-label="Butter and brown sugar dropping into the bowl"></video>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" data-scene>
+        <div class="scene__pin">
+          <div class="scene__text">
+            <p class="scene__num">03</p>
+            <h2 class="scene__title">Crack an egg.</h2>
+            <p class="scene__line">Just one, right in the middle.</p>
+          </div>
+          <div class="scene__media">
+            <video src="assets/video/egg.mp4" poster="assets/video/egg-poster.jpg" muted playsinline preload="auto" aria-label="An egg cracking into the bowl"></video>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene scene--flip" data-scene>
+        <div class="scene__pin">
+          <div class="scene__text">
+            <p class="scene__num">04</p>
+            <h2 class="scene__title">Flour in.</h2>
+            <p class="scene__line">A soft cloud as it lands.</p>
+          </div>
+          <div class="scene__media">
+            <video src="assets/video/flour.mp4" poster="assets/video/flour-poster.jpg" muted playsinline preload="auto" aria-label="Flour pouring into the bowl"></video>
+          </div>
+        </div>
+      </section>
+
+      <!--
+        Clips still to come (add the file to assets/video and copy a scene above):
+        05 "The good part." chocolate chips raining in (chocolate.mp4)
+        06 "Whisked by hand." the whisk folding it into dough (whisk.mp4)
+        09 "Break it slowly." the cookie pulling apart (break.mp4)
+      -->
+
+      <section class="scene" data-scene>
+        <div class="scene__pin">
+          <div class="scene__text">
+            <p class="scene__num">05</p>
+            <h2 class="scene__title">Into the oven.</h2>
+            <p class="scene__line">Scooped, rolled, baked.</p>
+          </div>
+          <div class="scene__media scene__media--photo">
+            <img src="assets/img/tray.jpg" alt="A tray of chocolate chip cookies fresh from the oven" loading="lazy" width="750" height="1000">
+          </div>
+        </div>
+      </section>
+
+      <section class="scene scene--flip scene--last" data-scene>
+        <div class="scene__pin">
+          <div class="scene__text">
+            <p class="scene__num">06</p>
+            <h2 class="scene__title">Golden at the edges.</h2>
+            <p class="scene__line">Fresh out of the oven, and ready for you.</p>
+            <div class="scene__actions">
+              <a class="btn btn--dark" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+              <a class="btn btn--line" href="#menu">See the menu</a>
+            </div>
+          </div>
+          <div class="scene__media scene__media--photo">
+            <img src="assets/img/choc-chip.jpg" alt="A chocolate chip cookie, close up" loading="lazy" width="800" height="1000">
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section id="menu" class="menu" aria-labelledby="menu-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="menu-title" class="display">The menu</h2>
+          <p class="italic">Tap a treat <span class="rose">· minimum of 6 cookies per order</span></p>
+        </div>
+
+        <div class="menu__grid">
+          <div class="menu__stage" aria-live="polite">
+            <figure class="menu__photo">
+              <img id="menu-photo" src="assets/img/choc-chip.jpg" alt="Chocolate Chip Cookie" width="800" height="1000">
+            </figure>
+            <div class="menu__info">
+              <p class="eyebrow" id="menu-kind">Cookie</p>
+              <h3 class="menu__name" id="menu-name">Chocolate Chip</h3>
+              <p class="italic menu__line" id="menu-line">Golden, chewy, milk chocolate chips.</p>
+              <ul class="menu__prices" id="menu-prices">
+                <li><strong>R100</strong> per half dozen</li>
+                <li><strong>R180</strong> per dozen</li>
+              </ul>
+              <a class="btn btn--dark" id="menu-order" href="#" target="_blank" rel="noopener">Order this on WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="menu__side">
+            <div class="menu__picks" role="group" aria-label="Choose a treat">
+              <button type="button" class="pick" data-item="cc" aria-pressed="true"><img src="assets/img/choc-chip.jpg" alt="" loading="lazy"><span>Chocolate Chip</span></button>
+              <button type="button" class="pick" data-item="dc" aria-pressed="false"><img src="assets/img/double-choc.jpg" alt="" loading="lazy"><span>Double Chocolate</span></button>
+              <button type="button" class="pick" data-item="rv" aria-pressed="false"><img src="assets/img/red-velvet.jpg" alt="" loading="lazy"><span>Red Velvet</span></button>
+              <button type="button" class="pick" data-item="bb" aria-pressed="false"><img src="assets/img/brownie-bites.jpg" alt="" loading="lazy"><span>Brownie Bites</span></button>
+            </div>
+            <div class="also">
+              <p class="eyebrow">Also baking</p>
+              <p><strong>Cookie bites</strong> and <strong>slabs</strong>. Message us for sizes and prices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-to-order" class="order" aria-labelledby="order-title">
+      <div class="wrap">
+        <h2 id="order-title" class="display">How to order</h2>
+        <ol class="steps">
+          <li><span class="steps__n">1</span><p>Browse the menu and choose your sweet treats.</p></li>
+          <li><span class="steps__n">2</span><p>Message us with your order on WhatsApp or Instagram. Minimum of 6 cookies per order.</p></li>
+          <li><span class="steps__n">3</span><p>Let us know whether you'd like your treats delivered or whether you'll be collecting.</p></li>
+          <li><span class="steps__n">4</span><p>We send you an invoice with your order total and our banking details.</p></li>
+          <li><span class="steps__n">5</span><p>Your order is confirmed once we receive proof of payment, and your treats are on the way.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="nasreen" class="baker" aria-labelledby="baker-title">
+      <div class="wrap baker__grid">
+        <div class="baker__card">
+          <img src="assets/img/logo.png" alt="" width="520" height="430" loading="lazy">
+        </div>
+        <div class="baker__text">
+          <p class="eyebrow">Meet the baker</p>
+          <h2 id="baker-title" class="display">Hi, I'm Nasreen.</h2>
+          <p class="italic baker__sub">The baker behind <span class="rose">Sweet Nothings</span></p>
+          <p class="baker__body">Every cookie, cookie bite, brownie bite and slab from Sweet Nothings is baked by me, at home. Choose your treats, send me a message, and I'll take it from there.</p>
+          <p class="eyebrow eyebrow--muted">Sweet Nothings Cakery · Est. 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap cta__grid">
+        <div>
+          <h2 id="cta-title" class="cta__title">Craving something <em>sweet?</em></h2>
+          <p class="cta__sub">Delivery or collection. Message to order.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--pink btn--big" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"/></svg>
+            WhatsApp 084 868 7123
+          </a>
+          <a class="btn btn--ghost" href="https://instagram.com/sweetnothingscakery_" target="_blank" rel="noopener">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8"/></svg>
+            @sweetnothingscakery_
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <img src="assets/img/logo.png" alt="Sweet Nothings Cakery" width="110" height="55" loading="lazy">
+      <p>© 2026 Sweet Nothings Cakery</p>
+      <nav aria-label="Footer">
+        <a href="#menu">Menu</a>
+        <a href="#how-to-order">How to order</a>
+        <a href="https://instagram.com/sweetnothingscakery_" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+    <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"/><path d="M9 8.5c0 3.5 2.5 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1-.4-2.4-1.8-2.8-2.8l.9-1-1-2z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

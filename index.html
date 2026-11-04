@@ -32,102 +32,26 @@
   </header>
 
   <main id="top">
-    <!-- Scroll to bake: each scene is pinned while its clip plays forward with the scroll. -->
-    <div class="bake" aria-label="How a Sweet Nothings cookie is made">
-      <ol class="bake__rail" aria-hidden="true"></ol>
-
-      <section class="scene scene--hero" data-scene>
-        <div class="scene__pin">
-          <div class="scene__text">
-            <p class="scene__eyebrow">Sweet Nothings Cakery</p>
-            <h1 class="scene__title">Let's bake.</h1>
-            <p class="scene__line">Scroll to start.</p>
-          </div>
-          <div class="scene__media">
-            <img src="assets/img/bowl.png" alt="An empty pink mixing bowl" width="1040" height="618">
-          </div>
-          <div class="scene__cue" aria-hidden="true"><span></span>Scroll</div>
-        </div>
-      </section>
-
-      <section class="scene scene--flip" data-scene>
-        <div class="scene__pin">
-          <div class="scene__text">
-            <p class="scene__num">02</p>
-            <h2 class="scene__title">Butter &amp; sugar.</h2>
-            <p class="scene__line">Nothing but sweet things.</p>
-          </div>
-          <div class="scene__media">
-            <video src="assets/video/butter.mp4" poster="assets/video/butter-poster.jpg" muted playsinline preload="auto" aria-label="Butter and brown sugar dropping into the bowl"></video>
+    <!-- The opening: scrolling pulls the cookie apart; the chocolate stretches, drips and pours into the page below. -->
+    <section class="break" aria-labelledby="hero-title">
+      <div class="break__pin">
+        <svg class="break__svg" aria-hidden="true" focusable="false"></svg>
+        <img class="break__fallback" src="assets/img/cookie-break.png" alt="" width="672" height="720">
+        <div class="break__text">
+          <p class="eyebrow">Sweet Nothings Cakery</p>
+          <h1 id="hero-title" class="break__title">Break it <span>slowly.</span></h1>
+          <p class="break__line">Warm, soft, melting. Cookies, bites and slabs, baked at home by Nasreen.</p>
+          <div class="break__actions">
+            <a class="btn btn--dark" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+            <a class="btn btn--line" href="#menu">See the menu</a>
           </div>
         </div>
-      </section>
-
-      <section class="scene" data-scene>
-        <div class="scene__pin">
-          <div class="scene__text">
-            <p class="scene__num">03</p>
-            <h2 class="scene__title">Crack an egg.</h2>
-            <p class="scene__line">Just one, right in the middle.</p>
-          </div>
-          <div class="scene__media">
-            <video src="assets/video/egg.mp4" poster="assets/video/egg-poster.jpg" muted playsinline preload="auto" aria-label="An egg cracking into the bowl"></video>
-          </div>
-        </div>
-      </section>
-
-      <section class="scene scene--flip" data-scene>
-        <div class="scene__pin">
-          <div class="scene__text">
-            <p class="scene__num">04</p>
-            <h2 class="scene__title">Flour in.</h2>
-            <p class="scene__line">A soft cloud as it lands.</p>
-          </div>
-          <div class="scene__media">
-            <video src="assets/video/flour.mp4" poster="assets/video/flour-poster.jpg" muted playsinline preload="auto" aria-label="Flour pouring into the bowl"></video>
-          </div>
-        </div>
-      </section>
-
-      <!--
-        Clips still to come (add the file to assets/video and copy a scene above):
-        05 "The good part." chocolate chips raining in (chocolate.mp4)
-        06 "Whisked by hand." the whisk folding it into dough (whisk.mp4)
-        09 "Break it slowly." the cookie pulling apart (break.mp4)
-      -->
-
-      <section class="scene" data-scene>
-        <div class="scene__pin">
-          <div class="scene__text">
-            <p class="scene__num">05</p>
-            <h2 class="scene__title">Into the oven.</h2>
-            <p class="scene__line">Scooped, rolled, baked.</p>
-          </div>
-          <div class="scene__media scene__media--photo">
-            <img src="assets/img/tray.jpg" alt="A tray of chocolate chip cookies fresh from the oven" loading="lazy" width="750" height="1000">
-          </div>
-        </div>
-      </section>
-
-      <section class="scene scene--flip scene--last" data-scene>
-        <div class="scene__pin">
-          <div class="scene__text">
-            <p class="scene__num">06</p>
-            <h2 class="scene__title">Golden at the edges.</h2>
-            <p class="scene__line">Fresh out of the oven, and ready for you.</p>
-            <div class="scene__actions">
-              <a class="btn btn--dark" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
-              <a class="btn btn--line" href="#menu">See the menu</a>
-            </div>
-          </div>
-          <div class="scene__media scene__media--photo">
-            <img src="assets/img/choc-chip.jpg" alt="A chocolate chip cookie, close up" loading="lazy" width="800" height="1000">
-          </div>
-        </div>
-      </section>
-    </div>
+        <div class="break__hint" aria-hidden="true"><span></span>Scroll to break it</div>
+      </div>
+    </section>
 
     <section id="menu" class="menu" aria-labelledby="menu-title">
+      <div class="spill spill--top" data-spill aria-hidden="true"></div>
       <div class="wrap">
         <div class="section-head">
           <h2 id="menu-title" class="display">The menu</h2>
@@ -167,7 +91,8 @@
       </div>
     </section>
 
-    <section id="how-to-order" class="order" aria-labelledby="order-title">
+    <section id="how-to-order" class="order order--choc" aria-labelledby="order-title">
+      <div class="spill spill--into" data-spill aria-hidden="true"></div>
       <div class="wrap">
         <h2 id="order-title" class="display">How to order</h2>
         <ol class="steps">
@@ -181,6 +106,7 @@
     </section>
 
     <section id="nasreen" class="baker" aria-labelledby="baker-title">
+      <div class="spill spill--top" data-spill aria-hidden="true"></div>
       <div class="wrap baker__grid">
         <div class="baker__card">
           <img src="assets/img/logo.png" alt="" width="520" height="430" loading="lazy">

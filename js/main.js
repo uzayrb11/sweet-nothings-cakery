@@ -1,4 +1,4 @@
-// Sweet Nothings Cakery: the cookie break, the chocolate spills and the interactive menu.
+// Sweet Nothings Cakery: the cookie break clip, the chocolate spills and the interactive menu.
 (function () {
   const WA = "https://wa.me/27848687123?text=";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -32,130 +32,37 @@
   }
 
   /* ---------- The cookie break ---------- */
+  // Scrolling through the opening plays the clip of the cookie splitting open, frame by frame.
+  // The clip was cut where both halves are still in view, so it stops there.
   const hero = document.querySelector(".break");
-  const svg = document.querySelector(".break__svg");
-  const COOKIE = "assets/img/cookie-break.png";
-  const ratio = 720 / 672;
+  const video = document.querySelector(".break__video");
+  let duration = 0, target = 0, seeking = false;
 
-  // The crack through the cookie, top to bottom, in cookie units (-0.5..0.5).
-  const crack = [];
-  for (let v = -0.6; v <= 0.601; v += 0.03) crack.push([0.026 * Math.sin(v * 13) + 0.012 * Math.sin(v * 31 + 1.3), v]);
-  const crackX = (v) => {
-    for (let i = 1; i < crack.length; i++) {
-      const [u0, v0] = crack[i - 1], [u1, v1] = crack[i];
-      if (v <= v1) return u0 + (u1 - u0) * ((v - v0) / (v1 - v0));
-    }
-    return 0;
-  };
-  // Strands of chocolate across the break: where (v), how thick, and when each one snaps.
-  // Thin ones go first; the molten centre stretches longest.
-  const strands = [
-    { v: -0.36, w: 0.014, snap: 0.18, sag: 0.3 }, { v: -0.29, w: 0.026, snap: 0.36, sag: 0.5 }, { v: -0.155, w: 0.044, snap: 0.66, sag: 0.35 },
-    { v: -0.1, w: 0.03, snap: 0.46, sag: 0.6 }, { v: 0.0, w: 0.085, snap: 0.96, sag: 0.45 }, { v: 0.08, w: 0.06, snap: 0.86, sag: 0.25 },
-    { v: 0.19, w: 0.038, snap: 0.58, sag: 0.55 }, { v: 0.25, w: 0.018, snap: 0.3, sag: 0.4 }, { v: 0.36, w: 0.022, snap: 0.24, sag: 0.35 }
-  ];
-
-  let W = 0, H = 0, s = 0, h = 0, cx = 0, cy = 0;
-  let halves = [], goo, shadow, molten;
-
-  function build() {
-    svg.textContent = "";
-    W = svg.clientWidth; H = svg.clientHeight;
-    const phone = W < 960;
-    s = phone ? Math.min(W * 0.78, H * 0.44) : Math.min(W * 0.34, H * 0.6);
-    h = s * ratio;
-    cx = phone ? W * 0.5 : W * 0.67;
-    cy = phone ? H * 0.66 : H * 0.5;
-    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-    const defs = mk("defs", {}, svg);
-    molten = moltenFilter(defs, "molten", (s * 0.008).toFixed(2), (s * 0.005).toFixed(2), (s * 0.04).toFixed(2), { k: 1.5, exp: 22 });
-    set(molten, { filterUnits: "userSpaceOnUse", x: cx - s * 1.2, y: cy - h * 0.9, width: s * 2.4, height: H });
-    const sg = mk("radialGradient", { id: "shade" }, defs);
-    mk("stop", { offset: "0", "stop-color": "#4A2C22", "stop-opacity": ".26" }, sg);
-    mk("stop", { offset: "1", "stop-color": "#4A2C22", "stop-opacity": "0" }, sg);
-    shadow = mk("ellipse", { fill: "url(#shade)" }, svg);
-    halves = [-1, 1].map((d) => {
-      const clip = mk("clipPath", { id: "half" + d }, defs);
-      let dd = "M" + (d * s) + "," + (-h);
-      crack.forEach(([u, v]) => { dd += " L" + (u * s).toFixed(1) + "," + (v * h).toFixed(1); });
-      dd += " L" + (d * s) + "," + h + " Z";
-      mk("path", { d: dd }, clip);
-      const g = mk("g", {}, svg);
-      mk("image", { href: COOKIE, x: -s / 2, y: -h / 2, width: s, height: h, "clip-path": "url(#half" + d + ")", preserveAspectRatio: "none" }, g);
-      return { d, g };
-    });
-    goo = mk("g", { filter: "url(#molten)", fill: "#3F1D0D", stroke: "#3F1D0D", "stroke-linecap": "round", "stroke-linejoin": "round" }, svg);
-    draw();
+  function seek() {
+    if (!duration || seeking) return;
+    const t = Math.min(duration - 0.04, target);
+    if (Math.abs(video.currentTime - t) < 0.02) return;
+    seeking = true;
+    video.currentTime = t;
   }
-
-  const place = (t, x, y) => { const c = Math.cos(t.rot), n = Math.sin(t.rot); return [t.tx + c * x - n * y, t.ty + n * x + c * y]; };
-
-  function draw() {
-    if (!W) return;
-    const p = parseFloat(hero.style.getPropertyValue("--p")) || 0;
-    const open = reduceMotion ? 0.32 : smooth(0.02, 0.7, p);
-    const pour = reduceMotion ? 0 : smooth(0.62, 1, p);
-    const gap = open * s * 0.26;
-    const T = halves.map((x) => ({ d: x.d, tx: cx + x.d * gap / 2, ty: cy + open * s * 0.03, rot: x.d * open * 0.11 }));
-    halves.forEach((x, i) => x.g.setAttribute("transform", "translate(" + T[i].tx.toFixed(1) + "," + T[i].ty.toFixed(1) + ") rotate(" + (T[i].rot * 57.3).toFixed(2) + ")"));
-    set(shadow, { cx, cy: cy + h * 0.5, rx: s * (0.62 + open * 0.24), ry: s * 0.075 });
-
-    let out = "";
-    const line = (x0, y0, x1, y1, w) => '<path d="M' + x0.toFixed(1) + "," + y0.toFixed(1) + " L" + x1.toFixed(1) + "," + y1.toFixed(1) + '" stroke-width="' + w.toFixed(1) + '"/>';
-    const blob = (x, y, r) => '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + r.toFixed(1) + '" stroke="none"/>';
-    const edge = (t, v, inset) => place(t, crackX(v) * s - t.d * inset, v * h);
-
-    if (open > 0.004) {
-      // the soft, molten face along each broken edge
-      const ew = s * 0.032 * clamp(open * 7, 0, 1);
-      T.forEach((t) => {
-        // short overlapping dabs, thick in the middle and thin at the ends, so the face looks lumpy and wet
-        for (let v = -0.36; v <= 0.39; v += 0.035) {
-          const taper = Math.cos(((v - 0.015) / 0.38) * 1.45);
-          const wob = 0.75 + 0.25 * Math.sin(v * 37 + t.d * 2) + 0.15 * Math.sin(v * 71);
-          const w = ew * taper * wob;
-          if (w < 1) continue;
-          const [x0, y0] = edge(t, v, w * 0.1), [x1, y1] = edge(t, v + 0.035, w * 0.1);
-          out += line(x0, y0, x1, y1, w);
-        }
-        // melted chips bulging out of the break
-        [[-0.22, 0.9], [-0.05, 1.2], [0.12, 1], [0.27, 0.8]].forEach(([v, k]) => { const [x, y] = edge(t, v + t.d * 0.02, ew * 0.25); out += blob(x, y, ew * 0.62 * k); });
-      });
-
-      // strands: stretch and sag, thin out, snap, then hang as drips from both halves
-      strands.forEach((st, i) => {
-        const L = edge(T[0], st.v, 0), R = edge(T[1], st.v, 0);
-        const base = st.w * s;
-        if (open < st.snap) {
-          const k = open / st.snap;
-          const w = base * Math.pow(1 - k, 0.75) + s * 0.006 * (1 - k);
-          const mx = (L[0] + R[0]) / 2, my = (L[1] + R[1]) / 2 + (R[0] - L[0]) * st.sag * k * k;
-          out += '<path d="M' + L[0].toFixed(1) + "," + L[1].toFixed(1) + " Q" + mx.toFixed(1) + "," + my.toFixed(1) + " " + R[0].toFixed(1) + "," + R[1].toFixed(1) + '" fill="none" stroke-width="' + w.toFixed(1) + '"/>';
-          out += blob(L[0], L[1], base * 0.5) + blob(R[0], R[1], base * 0.5);
-          if (k > 0.55) out += blob(mx, my + w * 0.2, w * (0.55 + (k - 0.55) * 1.2)); // the bead gathering at the low point
-        } else {
-          const a = smooth(st.snap, Math.min(1, st.snap + 0.25), open);
-          [L, R].forEach((P, j) => {
-            const len = base * (1.2 + a * 2.4) * (j ? 0.85 : 1) + pour * s * st.w * 5;
-            const r = base * (0.36 + a * 0.12);
-            out += blob(P[0], P[1], base * 0.5) + line(P[0], P[1], P[0] + (j ? -1 : 1) * base * 0.2, P[1] + len, r * 1.1) + blob(P[0] + (j ? -1 : 1) * base * 0.2, P[1] + len, r * 1.15);
-            // once it pours, drops let go and fall away down the page
-            if (pour > 0 && st.w > 0.035) {
-              const fall = Math.pow(clamp(pour * 1.25 - (i % 3) * 0.12, 0, 1), 1.7);
-              if (fall > 0) out += blob(P[0] + (j ? -1 : 1) * base * 0.2, P[1] + len + fall * H, r * 0.95);
-            }
-          });
-        }
-      });
-    }
-    goo.innerHTML = out;
-  }
+  video.addEventListener("seeked", () => { seeking = false; seek(); });
+  video.addEventListener("loadedmetadata", () => {
+    duration = video.duration || 0;
+    if (reduceMotion) { video.currentTime = Math.max(0, duration - 0.04); return; }
+    updateHero();
+  });
+  // some phones only show the first frame after the video has been asked to play once
+  video.play().then(() => video.pause()).catch(() => {});
+  if (video.readyState >= 1) video.dispatchEvent(new Event("loadedmetadata"));
 
   function updateHero() {
     const r = hero.getBoundingClientRect();
     const travel = Math.max(1, r.height - window.innerHeight);
-    hero.style.setProperty("--p", clamp(-r.top / travel, 0, 1).toFixed(4));
-    draw();
+    const p = clamp(-r.top / travel, 0, 1);
+    hero.style.setProperty("--p", p.toFixed(4));
+    if (reduceMotion) return;
+    target = smooth(0.02, 0.92, p) * duration; // the split finishes just before the opening scrolls away
+    seek();
   }
 
   /* ---------- Chocolate spilling into the sections ---------- */
@@ -220,7 +127,7 @@
   let lastW = 0;
   function onResize() {
     // phones resize the page when the address bar hides; only rebuild when the width really changes
-    if (window.innerWidth !== lastW || !W) { lastW = window.innerWidth; build(); buildSpills(); }
+    if (window.innerWidth !== lastW) { lastW = window.innerWidth; buildSpills(); }
     onScroll();
   }
   window.addEventListener("scroll", onScroll, { passive: true });

@@ -7,8 +7,8 @@ A plain HTML, CSS and JavaScript site with no build step. Open `index.html` in a
 
 ## What's on the page
 
-- **Break it slowly**: the opening. As you scroll, Nasreen's double chocolate cookie (`assets/img/cookie-break.png`)
-  pulls apart. Molten chocolate stretches across the break, thins, snaps and drips, then pours down the page.
+- **Break it slowly**: the opening. As you scroll, a clip of a chocolate chip cookie splitting open
+  (`assets/video/cookie-break.mp4`) plays frame by frame. It is cut to stop while both halves are still in view.
 - **Chocolate spills**: drips of chocolate run down into the top of the menu and the "Meet Nasreen" section, and a
   wave of chocolate rises into "How to order". Each one grows as its section scrolls into view.
 - **Menu**: tap a treat to see its photo, prices and an "Order this on WhatsApp" button with the message pre-filled.
@@ -16,14 +16,18 @@ A plain HTML, CSS and JavaScript site with no build step. Open `index.html` in a
 
 ## How the chocolate is drawn
 
-The chocolate is drawn as SVG shapes in `js/main.js`, not as a video. Every shape goes through one filter
+The opening clip is a video; the chocolate spilling into the sections below it is drawn as SVG shapes in `js/main.js`. Every shape goes through one filter
 (`moltenFilter`), which blurs the shapes and sharpens them again so that they flow into each other like liquid. The
 filter then lights them, so the chocolate looks thick and glossy.
 
-- `strands`: where each strand of chocolate crosses the break, how thick it is and when it snaps.
 - `dripSets`: where the drips hang in each section, how wide they are and how far they run.
 
-People who have turned on "reduce motion" see the cookie already broken and the drips at full length.
+People who have turned on "reduce motion" see the last frame of the clip (the cookie broken open) and the drips at full length.
+
+## Colours and type
+
+Deep page pink `#FAD4DC`, burgundy `#7D1619` for headlines and buttons, the logo's pink `#F88EA4` for small accents.
+Headlines in Playfair Display, accent words in Alex Brush, labels in Nunito Sans, everything else in DM Sans.
 
 ## Editing prices and items
 

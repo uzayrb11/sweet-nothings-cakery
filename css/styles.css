@@ -148,6 +148,30 @@ h1, h2, h3, p { margin: 0; }
 .quote__send[aria-disabled="true"] { opacity: .45; pointer-events: none; }
 .quote__small { font-size: 13px; color: var(--muted); }
 
+/* Delivery: the question, the address search and the map */
+.deliver { display: flex; flex-direction: column; gap: 12px; padding: 18px; border-radius: 22px; background: var(--cream); border: 2px solid var(--berry); }
+.deliver[hidden] { display: none; }
+.deliver__q { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.deliver__q p { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); line-height: 1.2; color: var(--berry); }
+.deliver__q strong { font-weight: 600; }
+.deliver__help-btn { flex: none; width: 44px; height: 44px; border-radius: 999px; border: 2px solid var(--berry); background: #fff; color: var(--berry); font: 700 20px/1 var(--serif); cursor: pointer; }
+.deliver__help-btn[aria-expanded="true"] { background: var(--berry); color: #FDE9EB; }
+.deliver__help { font-size: 15px; line-height: 1.5; padding: 12px 14px; border-radius: 14px; background: var(--blush); }
+.deliver__find label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.deliver__row { display: flex; gap: 8px; }
+.deliver__row input { flex: 1; min-width: 0; min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; font: 400 16px var(--sans); color: var(--cocoa); }
+.deliver__row .btn { min-height: 48px; }
+.deliver__map { height: 300px; border-radius: 16px; overflow: hidden; background: var(--blush-2); z-index: 0; }
+.deliver__result { font-size: 15px; }
+.deliver__result strong { color: var(--berry); }
+.deliver__result.is-out strong { color: var(--cocoa); }
+.deliver__small { font-size: 13px; color: var(--muted); }
+.map-pin { position: relative; }
+.map-pin span { position: absolute; inset: 0; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+.map-pin--us span { background: var(--pink); }
+.map-pin--you span { background: var(--berry); }
+.map-pin b { position: absolute; left: 26px; top: 1px; white-space: nowrap; font: 700 12px var(--sans); color: var(--berry); background: #fff; padding: 2px 6px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+
 /* Payment confirms the order: the note, and the proof-of-payment buttons */
 .pop { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: var(--berry); color: #FDE9EB; }
 .pop svg { flex: none; margin-top: 2px; color: var(--pink); }

@@ -204,7 +204,7 @@
   // the driving distance and time from the bakery, by road
   function route(lat, lng, label) {
     result.textContent = "Working out the distance…";
-    if (label && label !== "the pin on the map") address = label;
+    if (label && label !== "the pin on the map") address = label === "my current location" ? "my location: https://maps.google.com/?q=" + lat.toFixed(5) + "," + lng.toFixed(5) : label;
     else if (!address) address = "pin at " + lat.toFixed(5) + ", " + lng.toFixed(5);
     const url = "https://router.project-osrm.org/route/v1/driving/" + D.lng + "," + D.lat + ";" + lng + "," + lat + "?overview=false";
     fetch(url).then((r) => r.json()).then((j) => {
@@ -232,20 +232,42 @@
     const q = (addrInput.value || "").trim();
     if (!q) { addrInput.focus(); return; }
     result.textContent = "Looking up your address…";
-    const query = /johannesburg|joburg|jhb/i.test(q) ? q : q + ", Johannesburg";
     // OpenStreetMap search, nudged towards Joburg South. It works even if the map itself hasn't loaded.
-    fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=za&limit=1&viewbox=27.85,-26.15,28.20,-26.40&q=" + encodeURIComponent(query))
-      .then((r) => r.json()).then((list) => {
-        if (!list.length) { trip = null; result.textContent = "We couldn't find that address. Try your street and suburb, or tap your spot on the map."; update(); return; }
-        const lat = +list[0].lat, lng = +list[0].lon;
-        if (map) placePin(lat, lng, q); else route(lat, lng, q);
-      }).catch(() => { result.textContent = "We couldn't look that up right now. Tap your spot on the map, or choose courier."; });
+    // OpenStreetMap doesn't know every house number in Joburg South, so if the full address isn't found we try
+    // without the number, then just the suburb, and ask the customer to tap their exact spot.
+    const parts = q.split(",").map((x) => x.trim()).filter(Boolean);
+    const tries = [q, q.replace(/^\s*\d+[a-z]?\s+/i, ""), parts.length > 1 ? parts[parts.length - 1] : ""]
+      .filter((x, i, a) => x && a.indexOf(x) === i);
+    const search = (i) => {
+      if (i >= tries.length) return Promise.resolve(null);
+      const query = /johannesburg|joburg|jhb/i.test(tries[i]) ? tries[i] : tries[i] + ", Johannesburg";
+      return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=za&limit=1&viewbox=27.85,-26.15,28.20,-26.40&q=" + encodeURIComponent(query))
+        .then((r) => r.json()).then((list) => list.length ? { hit: list[0], exact: i === 0, rough: i === tries.length - 1 && tries.length > 1 } : new Promise((r) => setTimeout(r, 1100)).then(() => search(i + 1)));
+    };
+    search(0).then((found) => {
+      if (!found) { trip = null; result.textContent = "We couldn't find that address. Tap your spot on the map, or use your location."; update(); return; }
+      const lat = +found.hit.lat, lng = +found.hit.lon;
+      if (map) placePin(lat, lng, q); else route(lat, lng, q);
+      if (!found.exact) setTimeout(() => { result.insertAdjacentHTML("beforeend", " <em>We found your " + (found.rough ? "suburb" : "street") + ": tap your exact spot on the map or drag the pin for an exact fee.</em>"); }, 900);
+    }).catch(() => { result.textContent = "We couldn't look that up right now. Tap your spot on the map, or choose courier."; });
   }
   const findBtn = document.getElementById("deliver-find");
   if (findBtn) {
     findBtn.addEventListener("click", findAddress);
     addrInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); findAddress(); } });
     addrInput.addEventListener("input", () => { if (trip) { trip = null; result.textContent = "Tap Find to update the delivery fee."; update(); } });
+  }
+  // "Use my location": for customers ordering from home on their phone
+  const here = document.getElementById("deliver-here");
+  if (here) {
+    if (!("geolocation" in navigator)) here.hidden = true;
+    here.addEventListener("click", () => {
+      result.textContent = "Finding you…";
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const { latitude: lat, longitude: lng } = pos.coords;
+        loadLeaflet().then(() => { openMap(); setTimeout(() => (map ? placePin(lat, lng, "my current location") : route(lat, lng, "my current location")), map ? 0 : 500); });
+      }, () => { result.textContent = "We couldn't get your location. Type your address or tap the map instead."; }, { enableHighAccuracy: true, timeout: 10000 });
+    });
   }
   const help = document.getElementById("deliver-help-btn");
   if (help) help.addEventListener("click", () => {

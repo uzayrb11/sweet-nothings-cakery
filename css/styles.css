@@ -161,6 +161,8 @@ h1, h2, h3, p { margin: 0; }
 .deliver__row { display: flex; gap: 8px; }
 .deliver__row input { flex: 1; min-width: 0; min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; font: 400 16px var(--sans); color: var(--cocoa); }
 .deliver__row .btn { min-height: 48px; }
+.deliver__here { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 6px; padding: 0 4px; border: 0; background: none; color: var(--berry); font: 700 15px var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.deliver__here[hidden] { display: none; }
 .deliver__map { height: 300px; border-radius: 16px; overflow: hidden; background: var(--blush-2); z-index: 0; }
 .deliver__result { font-size: 15px; }
 .deliver__result strong { color: var(--berry); }

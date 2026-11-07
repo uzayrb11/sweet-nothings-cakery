@@ -26,10 +26,10 @@ Headlines in Playfair Display, accent words in Alex Brush, labels in Nunito Sans
 
 The rules live at the top of `js/quote.js`:
 
-- Cookies are sold in half dozens: R100 for 6, R180 for 12. Each flavour is priced on its own (18 Chocolate Chip =
-  R180 + R100 = R280).
-- Minimum 6 cookies per order.
-- Brownie bites have no fixed price: they appear as "price on request", and Nasreen adds them to the invoice.
+- Cookies are sold in half dozens: R100 for 6, R180 for 12. Flavours can be mixed, so the price is worked out on
+  all the cookies together (6 Chocolate Chip + 6 Red Velvet = one dozen, R180).
+- Minimum 6 cookies when cookies are ordered.
+- Brownie bites: R80 a box of 32; chocolate sauce R5 extra per box.
 - Delivery fees are added to the invoice.
 
 ## Editing prices and items

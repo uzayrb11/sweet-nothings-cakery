@@ -115,6 +115,12 @@ h1, h2, h3, p { margin: 0; }
 .stepper button { width: 44px; height: 44px; border-radius: 999px; border: 0; background: var(--berry); color: #FDE9EB; font: 700 22px/1 var(--sans); cursor: pointer; }
 .stepper button:disabled { background: var(--line); color: #fff; cursor: not-allowed; }
 .stepper output { min-width: 40px; text-align: center; font-weight: 700; font-size: 18px; }
+.quote__sauce { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; border-radius: 16px; background: var(--cream); font-size: 15px; font-weight: 700; cursor: pointer; }
+.quote__sauce[hidden] { display: none; }
+.quote__sauce span { font-weight: 400; color: var(--muted); }
+.quote__sauce input { width: 20px; height: 20px; accent-color: var(--berry); }
+.quote__lines li.is-part { padding-left: 12px; border-left: 2px solid var(--line); }
+.quote__lines li.is-part strong { font-weight: 500; }
 .quote__how { border: 0; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; }
 .quote__how legend { margin-bottom: 8px; }
 .quote__how label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 16px; cursor: pointer; }

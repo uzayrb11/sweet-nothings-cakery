@@ -170,7 +170,6 @@ h1, h2, h3, p { margin: 0; }
 .deliver__small { font-size: 13px; color: var(--muted); }
 .map-pin { position: relative; }
 .map-pin span { position: absolute; inset: 0; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
-.map-pin--us span { background: var(--pink); }
 .map-pin--you span { background: var(--berry); }
 .map-pin b { position: absolute; left: 26px; top: 1px; white-space: nowrap; font: 700 12px var(--sans); color: var(--berry); background: #fff; padding: 2px 6px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
 

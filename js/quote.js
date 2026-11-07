@@ -8,12 +8,12 @@
 // - Brownie bites: R80 a box of 32. Chocolate sauce is R5 extra per box.
 // - Collection is free.
 // - Delivery in Joburg South, from 9 Berwyn Road, Evans Park: R30 for the first 3 km by road, then R5 for every
-//   extra km (part of a km counts as a km), up to a 12-minute drive. Further than that: courier.
+//   extra km (part of a km counts as a km), up to 6 km by road. Further than that: courier.
 //   The customer finds their address on the map; the driving distance and time come from OpenStreetMap routing.
 // - A courier further away is quoted by Nasreen, so it is not added to the total.
 (function () {
   const PRICES = { half: 100, dozen: 180, brownieBox: 80, sauce: 5 };
-  const DELIVERY = { base: 30, baseKm: 3, perKm: 5, maxMinutes: 12, from: { lat: -26.24523, lng: 28.00299 } };
+  const DELIVERY = { base: 30, baseKm: 3, perKm: 5, maxKm: 6, from: { lat: -26.24523, lng: 28.00299 } };
   const MIN_COOKIES = 6;
   const BITES_PER_BOX = 32;
   const ITEMS = [
@@ -38,9 +38,9 @@
     return parts.join(" + ");
   }
 
-  // Delivery fee for a road distance in km, or null if the drive is longer than the limit.
-  function deliveryFee(km, minutes) {
-    if (!(km >= 0) || minutes > DELIVERY.maxMinutes) return null;
+  // Delivery fee for a road distance in km, or null if it is further than we deliver.
+  function deliveryFee(km) {
+    if (!(km >= 0) || km > DELIVERY.maxKm) return null;
     return DELIVERY.base + DELIVERY.perKm * Math.max(0, Math.ceil(km - DELIVERY.baseKm - 1e-9));
   }
 
@@ -76,7 +76,7 @@
       if (fee !== null) {
         total += fee;
         lines.push({ id: "delivery", name: "Delivery", detail: trip.km.toFixed(1) + " km · about " + Math.max(1, Math.round(trip.minutes)) + " min drive", price: fee });
-      } else deliveryProblem = trip ? "That's more than a 12-minute drive from us. Please choose courier." : "Find your address on the map to work out delivery.";
+      } else deliveryProblem = trip ? "That's more than 6 km from us. Please choose courier." : "Find your address on the map to work out delivery.";
     }
     if ((cookies || boxes) && how === "courier") lines.push({ id: "courier", name: "Courier", detail: "fee quoted by Nasreen", price: null });
     const problems = [];
@@ -187,7 +187,6 @@
       const L = window.L;
       map = L.map("deliver-map", { scrollWheelZoom: false }).setView([D.lat, D.lng], 13);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
-      L.marker([D.lat, D.lng], { icon: dot("map-pin--us", "Sweet Nothings"), keyboard: false }).addTo(map);
       // tapping the map puts the pin there (handy when the address search lands on the wrong spot)
       map.on("click", (e) => placePin(e.latlng.lat, e.latlng.lng, "the pin on the map"));
     }).catch(() => { document.getElementById("deliver-map").hidden = true; });
@@ -198,7 +197,7 @@
       pin = L.marker([lat, lng], { icon: dot("map-pin--you", "You"), draggable: true }).addTo(map);
       pin.on("dragend", () => { const p = pin.getLatLng(); route(p.lat, p.lng, "the pin on the map"); });
     } else pin.setLatLng([lat, lng]);
-    map.fitBounds(L.latLngBounds([[D.lat, D.lng], [lat, lng]]).pad(0.35), { maxZoom: 15 });
+    map.setView([lat, lng], Math.max(map.getZoom(), 15));
     route(lat, lng, label);
   }
   // the driving distance and time from the bakery, by road

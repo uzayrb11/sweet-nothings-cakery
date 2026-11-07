@@ -25,6 +25,7 @@
     </a>
     <nav class="nav" aria-label="Main">
       <a href="#menu">Menu</a>
+      <a href="#quote">Get a quote</a>
       <a href="#how-to-order">How to order</a>
       <a href="#nasreen">Meet Nasreen</a>
     </nav>
@@ -88,6 +89,77 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="quote" class="quote" aria-labelledby="quote-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="quote-title" class="display">Build your order</h2>
+          <p class="italic">Pick your treats <span class="rose">· your quote updates as you go</span></p>
+        </div>
+        <form class="quote__grid" id="quote-form" novalidate>
+          <div class="quote__items">
+            <p class="eyebrow">Cookies come in half dozens</p>
+            <div class="qrow" data-qty="cc" data-step="6" data-max="120" data-unit="cookies">
+              <img src="assets/img/choc-chip.jpg" alt="" loading="lazy" width="72" height="72">
+              <div class="qrow__text"><strong>Chocolate Chip</strong><small>R100 half dozen · R180 dozen</small></div>
+              <div class="stepper" role="group" aria-label="Chocolate Chip">
+                <button type="button" data-dir="-1" aria-label="Fewer Chocolate Chip">&minus;</button>
+                <output aria-live="polite">0</output>
+                <button type="button" data-dir="1" aria-label="More Chocolate Chip">+</button>
+              </div>
+              <span class="qrow__unit">cookies</span>
+            </div>
+            <div class="qrow" data-qty="dc" data-step="6" data-max="120" data-unit="cookies">
+              <img src="assets/img/double-choc.jpg" alt="" loading="lazy" width="72" height="72">
+              <div class="qrow__text"><strong>Double Chocolate Chip</strong><small>R100 half dozen · R180 dozen</small></div>
+              <div class="stepper" role="group" aria-label="Double Chocolate Chip">
+                <button type="button" data-dir="-1" aria-label="Fewer Double Chocolate Chip">&minus;</button>
+                <output aria-live="polite">0</output>
+                <button type="button" data-dir="1" aria-label="More Double Chocolate Chip">+</button>
+              </div>
+              <span class="qrow__unit">cookies</span>
+            </div>
+            <div class="qrow" data-qty="rv" data-step="6" data-max="120" data-unit="cookies">
+              <img src="assets/img/red-velvet.jpg" alt="" loading="lazy" width="72" height="72">
+              <div class="qrow__text"><strong>Red Velvet Chocolate Chip</strong><small>R100 half dozen · R180 dozen</small></div>
+              <div class="stepper" role="group" aria-label="Red Velvet Chocolate Chip">
+                <button type="button" data-dir="-1" aria-label="Fewer Red Velvet Chocolate Chip">&minus;</button>
+                <output aria-live="polite">0</output>
+                <button type="button" data-dir="1" aria-label="More Red Velvet Chocolate Chip">+</button>
+              </div>
+              <span class="qrow__unit">cookies</span>
+            </div>
+            <div class="qrow" data-qty="bb" data-step="1" data-max="10" data-unit="boxes">
+              <img src="assets/img/brownie-bites.jpg" alt="" loading="lazy" width="72" height="72">
+              <div class="qrow__text"><strong>Brownie Bites</strong><small>Price on request</small></div>
+              <div class="stepper" role="group" aria-label="Brownie Bites">
+                <button type="button" data-dir="-1" aria-label="Fewer Brownie Bites">&minus;</button>
+                <output aria-live="polite">0</output>
+                <button type="button" data-dir="1" aria-label="More Brownie Bites">+</button>
+              </div>
+              <span class="qrow__unit">boxes</span>
+            </div>
+            <fieldset class="quote__how">
+              <legend class="eyebrow">Delivery or collection</legend>
+              <label><input type="radio" name="how" value="collect" checked> I'll collect</label>
+              <label><input type="radio" name="how" value="deliver"> Please deliver</label>
+            </fieldset>
+            <label class="quote__name">Your name <span>(optional)</span>
+              <input type="text" id="quote-name" name="name" autocomplete="given-name" maxlength="60">
+            </label>
+          </div>
+          <aside class="quote__card" aria-labelledby="quote-card-title">
+            <p class="eyebrow" id="quote-card-title">Your quote</p>
+            <ul class="quote__lines" id="quote-lines"></ul>
+            <div class="quote__total"><span>Total</span><strong id="quote-total" aria-live="polite">R0</strong></div>
+            <p class="quote__note" id="quote-note"></p>
+            <p class="quote__problem" id="quote-problem" role="alert"></p>
+            <a class="btn btn--dark quote__send" id="quote-send" href="#" target="_blank" rel="noopener" aria-disabled="true">Send this order on WhatsApp</a>
+            <p class="quote__small">Minimum 6 cookies per order. Nasreen confirms your order and sends an invoice with banking details.</p>
+          </aside>
+        </form>
       </div>
     </section>
 
@@ -156,5 +228,6 @@
   </a>
 
   <script src="js/main.js"></script>
+  <script src="js/quote.js"></script>
 </body>
 </html>

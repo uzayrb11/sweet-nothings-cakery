@@ -121,8 +121,13 @@ h1, h2, h3, p { margin: 0; }
 .quote__sauce input { width: 20px; height: 20px; accent-color: var(--berry); }
 .quote__lines li.is-part { padding-left: 12px; border-left: 2px solid var(--line); }
 .quote__lines li.is-part strong { font-weight: 500; }
-.quote__how { border: 0; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; }
-.quote__how legend { margin-bottom: 8px; }
+.quote__how { border: 0; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.quote__how legend { margin-bottom: 8px; padding: 0; }
+.how { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border-radius: 18px; background: var(--blush-2); border: 2px solid transparent; cursor: pointer; }
+.how:has(input:checked) { background: var(--cream); border-color: var(--berry); }
+.how span { display: flex; flex-direction: column; gap: 2px; }
+.how strong { font-size: 15px; }
+.how small { font-size: 13px; color: var(--cocoa-2); }
 .quote__how label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 16px; cursor: pointer; }
 .quote__how input { width: 20px; height: 20px; accent-color: var(--berry); }
 .quote__name { display: flex; flex-direction: column; gap: 6px; max-width: 380px; font-weight: 700; font-size: 15px; }
@@ -142,6 +147,25 @@ h1, h2, h3, p { margin: 0; }
 .quote__problem { font-size: 14px; font-weight: 700; color: var(--berry); }
 .quote__send[aria-disabled="true"] { opacity: .45; pointer-events: none; }
 .quote__small { font-size: 13px; color: var(--muted); }
+
+/* Payment confirms the order: the note, and the proof-of-payment buttons */
+.pop { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: var(--berry); color: #FDE9EB; }
+.pop svg { flex: none; margin-top: 2px; color: var(--pink); }
+.pop p { font-size: 15px; line-height: 1.45; }
+.pop strong { display: block; font-size: 17px; color: #fff; }
+.pop-send { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 16px; border: 1.5px dashed var(--pink); }
+.pop-send__label { font-weight: 700; font-size: 15px; }
+.pop-send__btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.pop-band { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 32px; align-items: center; padding: clamp(22px, 3vw, 34px); border-radius: 28px; background: var(--blush); border: 2px solid var(--berry); }
+.pop-band__title { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3vw, 40px); line-height: 1.05; color: var(--berry); margin-bottom: 8px; }
+.pop-band__btns { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Follow us on Instagram */
+.follow { padding: clamp(50px, 6vw, 80px) 0; background: var(--cream); }
+.follow__row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: center; }
+.follow__title { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1; color: var(--berry); margin: 8px 0 10px; }
+.follow__title .script { font-size: .8em; }
+.follow__sub { font-size: 18px; color: var(--cocoa-2); }
 
 /* How to order */
 .order { position: relative; background: var(--cream); padding: clamp(110px, 12vw, 180px) 0 clamp(70px, 9vw, 120px); }
@@ -190,6 +214,8 @@ h1, h2, h3, p { margin: 0; }
   .break__actions { display: none; }
   .menu__grid { grid-template-columns: 1fr; }
   .quote__grid { grid-template-columns: 1fr; }
+  .quote__how { grid-template-columns: 1fr; }
+  .pop-band, .follow__row { grid-template-columns: 1fr; }
   .quote__card { position: static; }
   .steps { grid-template-columns: 1fr; gap: 20px; }
   .baker__grid { grid-template-columns: 1fr; }

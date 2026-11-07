@@ -30,7 +30,10 @@ The rules live at the top of `js/quote.js`:
   all the cookies together (6 Chocolate Chip + 6 Red Velvet = one dozen, R180).
 - Minimum 6 cookies when cookies are ordered.
 - Brownie bites: R80 a box of 32; chocolate sauce R5 extra per box.
-- Delivery fees are added to the invoice.
+- Collection is free. Delivery in Joburg South (small radius) is R50 and is added to the quote. A courier further
+  away is quoted by Nasreen and is not added to the total.
+- Payment confirms the order: customers send proof of payment by WhatsApp (084 868 7123) or email
+  (sweetnothingscakery01@gmail.com); both buttons carry the order summary.
 
 ## Editing prices and items
 

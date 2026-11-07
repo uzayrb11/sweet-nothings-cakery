@@ -143,9 +143,10 @@
             </div>
             <label class="quote__sauce" hidden><input type="checkbox" id="quote-sauce" name="sauce"> Add chocolate sauce to the brownie bites <span>(+R5 a box)</span></label>
             <fieldset class="quote__how">
-              <legend class="eyebrow">Delivery or collection</legend>
-              <label><input type="radio" name="how" value="collect" checked> I'll collect</label>
-              <label><input type="radio" name="how" value="deliver"> Please deliver</label>
+              <legend class="eyebrow">Collection or delivery</legend>
+              <label class="how"><input type="radio" name="how" value="collect" checked><span><strong>Collection</strong><small>Free</small></span></label>
+              <label class="how"><input type="radio" name="how" value="deliver"><span><strong>Delivery in Joburg South</strong><small>R50 · small radius</small></span></label>
+              <label class="how"><input type="radio" name="how" value="courier"><span><strong>Courier</strong><small>Further away · fee quoted by Nasreen</small></span></label>
             </fieldset>
             <label class="quote__name">Your name <span>(optional)</span>
               <input type="text" id="quote-name" name="name" autocomplete="given-name" maxlength="60">
@@ -157,8 +158,20 @@
             <div class="quote__total"><span>Total</span><strong id="quote-total" aria-live="polite">R0</strong></div>
             <p class="quote__note" id="quote-note"></p>
             <p class="quote__problem" id="quote-problem" role="alert"></p>
-            <a class="btn btn--dark quote__send" id="quote-send" href="#" target="_blank" rel="noopener" aria-disabled="true">Send this order on WhatsApp</a>
-            <p class="quote__small">Minimum 6 cookies per cookie order. Flavours can be mixed into dozens. Nasreen confirms your order and sends an invoice with banking details.</p>
+            <div class="pop" role="note">
+              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><circle cx="12" cy="16" r="0.6"/></svg>
+              <p><strong>Payment confirms your order.</strong> Your treats are only booked once we receive your proof of payment.</p>
+            </div>
+            <a class="btn btn--dark quote__send" id="quote-send" href="#" target="_blank" rel="noopener" aria-disabled="true">1. Send this order on WhatsApp</a>
+            <p class="quote__small">Nasreen replies with your invoice and banking details. Once you've paid:</p>
+            <div class="pop-send">
+              <p class="pop-send__label">2. Send your proof of payment</p>
+              <div class="pop-send__btns">
+                <a class="btn btn--line btn--small" id="pop-wa" href="https://wa.me/27848687123" target="_blank" rel="noopener">WhatsApp 084 868 7123</a>
+                <a class="btn btn--line btn--small" id="pop-email" href="mailto:sweetnothingscakery01@gmail.com">Email us</a>
+              </div>
+            </div>
+            <p class="quote__small">Minimum 6 cookies per cookie order. Flavours can be mixed into dozens.</p>
           </aside>
         </form>
       </div>
@@ -170,10 +183,20 @@
         <ol class="steps">
           <li><span class="steps__n">1</span><p>Browse the menu and choose your sweet treats.</p></li>
           <li><span class="steps__n">2</span><p>Message us with your order on WhatsApp or Instagram. Minimum of 6 cookies per order.</p></li>
-          <li><span class="steps__n">3</span><p>Let us know whether you'd like your treats delivered or whether you'll be collecting.</p></li>
+          <li><span class="steps__n">3</span><p>Choose collection, delivery in Joburg South (R50), or a courier further away.</p></li>
           <li><span class="steps__n">4</span><p>We send you an invoice with your order total and our banking details.</p></li>
           <li><span class="steps__n">5</span><p>Your order is confirmed once we receive proof of payment, and your treats are on the way.</p></li>
         </ol>
+        <div class="pop-band" role="note">
+          <div>
+            <p class="pop-band__title">Payment confirms your order</p>
+            <p>Send your proof of payment by WhatsApp or email. We start baking as soon as it arrives.</p>
+          </div>
+          <div class="pop-band__btns">
+            <a class="btn btn--dark" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20Here's%20my%20proof%20of%20payment%20(attached)." target="_blank" rel="noopener">Send POP on WhatsApp</a>
+            <a class="btn btn--line" href="mailto:sweetnothingscakery01@gmail.com?subject=Proof%20of%20payment%20-%20Sweet%20Nothings%20order&body=Hi%20Nasreen%2C%0A%0AMy%20proof%20of%20payment%20is%20attached.%0A%0AName%3A%20">Email sweetnothingscakery01@gmail.com</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -192,11 +215,22 @@
       </div>
     </section>
 
+    <section class="follow" aria-labelledby="follow-title">
+      <div class="wrap follow__row">
+        <div>
+          <p class="eyebrow">On Instagram</p>
+          <h2 id="follow-title" class="follow__title">Follow us <span class="script">@sweetnothingscakery_</span></h2>
+          <p class="follow__sub">New bakes, monthly specials and a look behind the scenes.</p>
+        </div>
+        <a class="btn btn--dark btn--big follow__btn" href="https://instagram.com/sweetnothingscakery_" target="_blank" rel="noopener"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8"/></svg>Follow us on Instagram</a>
+      </div>
+    </section>
+
     <section class="cta" aria-labelledby="cta-title">
       <div class="wrap cta__grid">
         <div>
           <h2 id="cta-title" class="cta__title">Craving something <em>sweet?</em></h2>
-          <p class="cta__sub">Delivery or collection. Message to order.</p>
+          <p class="cta__sub">Collection, delivery in Joburg South, or courier. Message to order.</p>
         </div>
         <div class="cta__actions">
           <a class="btn btn--pink btn--big" href="https://wa.me/27848687123?text=Hi%20Nasreen!%20I'd%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
@@ -205,7 +239,7 @@
           </a>
           <a class="btn btn--ghost" href="https://instagram.com/sweetnothingscakery_" target="_blank" rel="noopener">
             <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8"/></svg>
-            @sweetnothingscakery_
+            Follow us on Instagram
           </a>
         </div>
       </div>
@@ -219,7 +253,7 @@
       <nav aria-label="Footer">
         <a href="#menu">Menu</a>
         <a href="#how-to-order">How to order</a>
-        <a href="https://instagram.com/sweetnothingscakery_" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://instagram.com/sweetnothingscakery_" target="_blank" rel="noopener">Follow us on Instagram</a>
       </nav>
     </div>
   </footer>

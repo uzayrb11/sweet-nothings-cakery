@@ -6,9 +6,10 @@
 //   6 Chocolate Chip + 6 Red Velvet is one dozen, R180. Every full dozen is R180 and a leftover half dozen is R100.
 // - Minimum of 6 cookies when cookies are ordered.
 // - Brownie bites: R80 a box of 32. Chocolate sauce is R5 extra per box.
-// - Delivery or collection: any delivery fee is confirmed by Nasreen with the invoice.
+// - Collection is free. Delivery in Joburg South (a small radius) is R50 and goes on the quote.
+//   A courier further away is quoted by Nasreen, so it is not added to the total.
 (function () {
-  const PRICES = { half: 100, dozen: 180, brownieBox: 80, sauce: 5 };
+  const PRICES = { half: 100, dozen: 180, brownieBox: 80, sauce: 5, delivery: 50 };
   const MIN_COOKIES = 6;
   const BITES_PER_BOX = 32;
   const ITEMS = [
@@ -34,7 +35,8 @@
   }
 
   // qty: { cc: cookies, dc: cookies, rv: cookies, bb: boxes }, sauce: chocolate sauce on the brownie boxes
-  function quote(qty, sauce) {
+  // how: "collect" | "deliver" (Joburg South) | "courier"
+  function quote(qty, sauce, how) {
     const lines = [];
     let total = 0, cookies = 0;
     ITEMS.filter((it) => it.kind === "cookie").forEach((it) => {
@@ -58,6 +60,11 @@
         lines.push({ id: "sauce", name: "Chocolate sauce", detail: "on " + boxes + (boxes === 1 ? " box" : " boxes"), price: boxes * PRICES.sauce });
       }
     }
+    if ((cookies || boxes) && how === "deliver") {
+      total += PRICES.delivery;
+      lines.push({ id: "delivery", name: "Delivery", detail: "Joburg South", price: PRICES.delivery });
+    }
+    if ((cookies || boxes) && how === "courier") lines.push({ id: "courier", name: "Courier", detail: "fee quoted by Nasreen", price: null });
     const problems = [];
     if (!cookies && !boxes) problems.push("Choose at least one treat.");
     else if (cookies > 0 && cookies < MIN_COOKIES) problems.push("The minimum order is " + MIN_COOKIES + " cookies.");
@@ -106,9 +113,9 @@
 
   function update() {
     const sauceBox = form.querySelector("#quote-sauce");
-    const q = quote(qty, sauceBox && sauceBox.checked);
-    if (sauceBox) sauceBox.closest(".quote__sauce").hidden = !qty.bb;
     const how = (form.querySelector("input[name='how']:checked") || {}).value || "collect";
+    const q = quote(qty, sauceBox && sauceBox.checked, how);
+    if (sauceBox) sauceBox.closest(".quote__sauce").hidden = !qty.bb;
     const name = (form.querySelector("#quote-name").value || "").trim();
     out.lines.innerHTML = q.lines.length
       ? q.lines.map((l) => "<li" + (l.part ? ' class="is-part"' : "") + "><span><strong>" + l.name + "</strong><small>" + l.detail + "</small></span><span>" + (l.price === null ? "" : rand(l.price)) + "</span></li>").join("")
@@ -116,16 +123,22 @@
     out.total.textContent = rand(q.total);
     const notes = [];
     if (q.cookies && q.lines.filter((l) => l.part).length > 1) notes.push("Flavours are mixed into dozens for the best price.");
-    if (how === "deliver") notes.push("Any delivery fee is added to your invoice.");
+    if (how === "courier") notes.push("Courier cost is added to your invoice.");
     out.note.textContent = notes.join(" ");
     out.problem.textContent = q.lines.length ? q.problems.join(" ") : "";
     // the WhatsApp message carries the whole order, so Nasreen can send the invoice straight away
     const msg = ["Hi Nasreen! I'd like to order:"]
       .concat(q.lines.map((l) => (l.part ? "  - " : "- ") + l.name + ": " + l.detail + (l.price === null ? "" : " = " + rand(l.price))))
-      .concat(["Quote total: " + rand(q.total) + (how === "deliver" ? " + delivery" : ""),
-               how === "deliver" ? "I'd like it delivered." : "I'll collect.",
+      .concat(["Quote total: " + rand(q.total) + (how === "courier" ? " + courier" : ""),
+               how === "deliver" ? "Please deliver (Joburg South)." : how === "courier" ? "Please send it with a courier." : "I'll collect.",
                name ? "Name: " + name : ""]).filter(Boolean).join("\n");
     out.send.href = "https://wa.me/27848687123?text=" + encodeURIComponent(msg);
+    // proof of payment: the same order summary, so Nasreen can match the payment to the order
+    const summary = q.lines.length ? q.lines.filter((l) => !l.part).map((l) => l.name + ": " + l.detail).join(", ") + ". Total " + rand(q.total) : "";
+    const popText = "Hi Nasreen! Here's my proof of payment (attached)." + (summary ? " Order: " + summary + "." : "") + (name ? " Name: " + name + "." : "");
+    const popWa = document.getElementById("pop-wa"), popEmail = document.getElementById("pop-email");
+    if (popWa) popWa.href = "https://wa.me/27848687123?text=" + encodeURIComponent(popText);
+    if (popEmail) popEmail.href = "mailto:sweetnothingscakery01@gmail.com?subject=" + encodeURIComponent("Proof of payment - Sweet Nothings order" + (name ? " - " + name : "")) + "&body=" + encodeURIComponent("Hi Nasreen,\n\nMy proof of payment is attached.\n\n" + (summary ? "Order: " + summary + "\n" : "") + (name ? "Name: " + name + "\n" : ""));
     if (q.ok) out.send.removeAttribute("aria-disabled"); else out.send.setAttribute("aria-disabled", "true");
   }
   update();

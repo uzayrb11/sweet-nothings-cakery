@@ -59,10 +59,13 @@ h1, h2, h3, p { margin: 0; }
 /* The opening: the cookie breaks open as you scroll */
 .break { position: relative; height: 260vh; }
 .break__pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.break__media { position: absolute; margin: 0; right: clamp(24px, 4vw, 72px); top: 50%; transform: translateY(-46%); width: min(56vw, 860px); aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; background: #1E1A18; box-shadow: 0 30px 60px rgba(125,22,25,.22); }
-.break__video { width: 100%; height: 100%; object-fit: cover; }
-/* the chocolate running out of the clip and down the page, drawn by js/main.js */
+.break__media { position: absolute; margin: 0; right: clamp(16px, 3vw, 56px); top: 50%; transform: translateY(-50%); width: min(58vw, 900px); aspect-ratio: 900 / 594; }
+/* the cookie floats on the page: a soft shadow is all that sits under it */
+.break__canvas { width: 100%; height: 100%; display: block; filter: drop-shadow(0 26px 30px rgba(125,22,25,.18)); }
+/* the chocolate pouring out of the cookie, and the stream that runs down the whole page (js/main.js) */
 .break__pour { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; }
+main { position: relative; }
+.flow { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 6; overflow: visible; }
 .break__text { position: absolute; left: clamp(24px, 5vw, 88px); top: 50%; transform: translateY(-46%); width: min(500px, 34vw); display: flex; flex-direction: column; gap: 18px; z-index: 2; }
 .break__title { font-family: var(--serif); font-weight: 600; font-size: clamp(56px, 6.6vw, 112px); line-height: .92; letter-spacing: -.025em; color: var(--berry); }
 .break__title span { display: block; font-family: var(--hand); font-weight: 400; font-size: 1.05em; line-height: .95; letter-spacing: 0; color: var(--script); }
@@ -72,12 +75,9 @@ h1, h2, h3, p { margin: 0; }
 .break__hint span { width: 1.5px; height: 36px; background: linear-gradient(var(--berry), transparent); animation: cue 1.8s ease-in-out infinite; }
 @keyframes cue { 0%,100% { transform: scaleY(.4); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } }
 
-/* Chocolate spilling into the sections: built and grown by js/main.js as each section scrolls in. */
-.spill { position: absolute; left: 0; right: 0; top: 0; height: 0; z-index: 3; pointer-events: none; }
-.spill svg { position: absolute; left: 0; width: 100%; overflow: visible; }
 
 /* Menu */
-.menu { position: relative; padding: clamp(170px, 18vw, 260px) 0 clamp(80px, 9vw, 120px); }
+.menu { position: relative; padding: clamp(110px, 12vw, 180px) 0 clamp(80px, 9vw, 120px); }
 .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; margin-bottom: 36px; }
 .menu__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 40px; align-items: start; }
 .menu__stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: center; background: var(--blush-2); border-radius: 32px; padding: clamp(18px, 3vw, 36px); }
@@ -105,14 +105,14 @@ h1, h2, h3, p { margin: 0; }
 .also { padding: 16px 18px; border-radius: 20px; border: 1.5px dashed var(--pink); display: flex; flex-direction: column; gap: 6px; font-size: 15px; }
 
 /* How to order */
-.order { position: relative; background: var(--cream); padding: clamp(170px, 18vw, 250px) 0 clamp(70px, 9vw, 120px); }
+.order { position: relative; background: var(--cream); padding: clamp(110px, 12vw, 180px) 0 clamp(70px, 9vw, 120px); }
 .steps { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; counter-reset: s; }
 .steps li { display: flex; flex-direction: column; gap: 12px; padding-top: 18px; border-top: 1.5px solid var(--berry); }
 .steps__n { font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 1; color: var(--rose); }
 .steps p { font-size: 16px; }
 
 /* Baker */
-.baker { position: relative; padding: clamp(170px, 18vw, 250px) 0 clamp(60px, 8vw, 110px); }
+.baker { position: relative; padding: clamp(110px, 12vw, 180px) 0 clamp(60px, 8vw, 110px); }
 .baker__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
 .baker__card { border-radius: 32px; background: #FEF2F2; border: 1.5px solid var(--line); padding: 40px; transform: rotate(-3deg); box-shadow: 0 24px 50px rgba(194,69,106,.12); }
 .baker__card img { width: 100%; height: auto; }
@@ -147,7 +147,7 @@ h1, h2, h3, p { margin: 0; }
   .break__title span { display: inline; }
   .break__pin { display: flex; flex-direction: column; justify-content: center; gap: 28px; padding: calc(var(--header) + 8px) 16px 72px; }
   .break__text { position: relative; inset: auto; padding: 0 4px; order: -1; }
-  .break__media { position: relative; inset: auto; width: 100%; transform: none; border-radius: 22px; }
+  .break__media { position: relative; inset: auto; width: 100%; transform: none; }
   .break__actions { display: none; }
   .menu__grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; gap: 20px; }

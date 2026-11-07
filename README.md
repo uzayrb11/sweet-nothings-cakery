@@ -7,26 +7,22 @@ A plain HTML, CSS and JavaScript site with no build step. Open `index.html` in a
 
 ## What's on the page
 
-- **Break it slowly**: the opening. As you scroll, a clip of a chocolate chip cookie splitting open
-  (`assets/video/cookie-break.mp4`) plays frame by frame. It is cut to stop while both halves are still in view;
-  then drips run out of the chocolate in the clip, over the edge of the frame and down into the page.
-- **Chocolate spills**: drips of chocolate run down into the top of the menu and the "Meet Nasreen" section, and a
-  wave of chocolate rises into "How to order". Each one grows as its section scrolls into view.
+- **Break it slowly**: the opening. As you scroll, a chocolate chip cookie splits open. It floats on the page with
+  its crumbs: the clip was cut out of its background and saved as transparent frames (`assets/frames/00.webp` to
+  `55.webp`), drawn one by one as you scroll. It stops while both halves are still in view.
+- **One stream of chocolate**: then the chocolate pours out of the cookie and keeps going, as one unbroken stream,
+  down the whole page. It runs down the sides, sweeps across the gap between each section to the other side, drips a
+  little as it goes, and pools at the very bottom. Its front follows your scroll.
 - **Menu**: tap a treat to see its photo, prices and an "Order this on WhatsApp" button with the message pre-filled.
 - **How to order**, **Meet Nasreen**, and the WhatsApp (084 868 7123) and Instagram (@sweetnothingscakery_) links.
 
 ## How the chocolate is drawn
 
-The opening clip is a video. The chocolate pouring out of it and spilling into the sections is drawn as SVG shapes in
-`js/main.js` and filled with real chocolate cut from the clip's last frame (`assets/img/choc-texture.jpg`), so it has
-the same colour, streaks and shine. Every shape goes through one filter
-(`moltenFilter`), which blurs the shapes and sharpens them again so that they flow into each other like liquid. The
-filter then lights them, so the chocolate looks thick and glossy.
+The stream is an SVG path built in `js/main.js` (`buildFlow`) from the real positions of the sections, so it always
+crosses in the empty space between them, never over a heading. It is shaded in layers (rim, body, sheen, highlight)
+with colours sampled from the clip's chocolate. `SPOUT` is where it leaves the cookie in the last frame.
 
-- `pours`: where each drip leaves the chocolate in the clip's last frame, how wide and how long it is.
-- `dripSets`: where the drips hang in each section, how wide they are and how far they run.
-
-People who have turned on "reduce motion" see the last frame of the clip (the cookie broken open) and the drips at full length.
+People who have turned on "reduce motion" see the cookie already broken and the whole stream at once.
 
 ## Colours and type
 

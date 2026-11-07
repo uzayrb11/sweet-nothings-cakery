@@ -32,11 +32,11 @@
   </header>
 
   <main id="top">
-    <!-- The opening: scrolling plays the clip of the cookie splitting open, and stops while both halves are still in view. -->
+    <!-- The opening: scrolling breaks the cookie open, frame by frame; then its chocolate pours out and runs down the page. -->
     <section class="break" aria-labelledby="hero-title">
       <div class="break__pin">
         <figure class="break__media">
-          <video class="break__video" src="assets/video/cookie-break.mp4" poster="assets/img/cookie-break-start.jpg" muted playsinline preload="auto" width="1280" height="720" aria-label="A chocolate chip cookie splitting open, melted chocolate stretching between the halves"></video>
+          <canvas class="break__canvas" width="900" height="594" role="img" aria-label="A chocolate chip cookie splitting open, melted chocolate stretching between the halves"></canvas>
         </figure>
         <div class="break__text">
           <p class="eyebrow">Sweet Nothings Cakery</p>
@@ -52,7 +52,6 @@
     </section>
 
     <section id="menu" class="menu" aria-labelledby="menu-title">
-      <div class="spill spill--top" data-spill aria-hidden="true"></div>
       <div class="wrap">
         <div class="section-head">
           <h2 id="menu-title" class="display">The menu</h2>
@@ -93,7 +92,6 @@
     </section>
 
     <section id="how-to-order" class="order" aria-labelledby="order-title">
-      <div class="spill spill--top" data-spill aria-hidden="true"></div>
       <div class="wrap">
         <h2 id="order-title" class="display">How to order</h2>
         <ol class="steps">
@@ -107,7 +105,6 @@
     </section>
 
     <section id="nasreen" class="baker" aria-labelledby="baker-title">
-      <div class="spill spill--top" data-spill aria-hidden="true"></div>
       <div class="wrap baker__grid">
         <div class="baker__card">
           <img src="assets/img/logo.png" alt="" width="520" height="430" loading="lazy">

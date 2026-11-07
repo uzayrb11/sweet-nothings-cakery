@@ -7,8 +7,8 @@
 
   /* ---------- The cookie breaking open ---------- */
   // The clip, cut out of its background so the cookie and crumbs float on the page, is a run of transparent frames
-  // (assets/frames/00.webp ... 55.webp). Scrolling through the opening draws them one by one.
-  const FRAMES = 56;
+  // (assets/frames/00.webp ... 49.webp). Scrolling through the opening draws them one by one.
+  const FRAMES = 50;
   const CLIP_END = 0.9; // share of the opening's scroll spent breaking the cookie; it then holds on the last frame
 
   const hero = document.querySelector(".break");
@@ -47,6 +47,8 @@
     const travel = Math.max(1, r.height - window.innerHeight);
     const p = clamp(-r.top / travel, 0, 1);
     hero.style.setProperty("--p", p.toFixed(4));
+    // the line fades in over the last part of the split, once the halves have moved apart
+    hero.style.setProperty("--love", (reduceMotion ? 1 : smooth(CLIP_END - 0.22, CLIP_END, p)).toFixed(3));
     want = reduceMotion ? FRAMES - 1 : Math.round(smooth(0.02, CLIP_END, p) * (FRAMES - 1));
     drawFrame(want);
   }

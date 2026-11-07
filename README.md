@@ -9,7 +9,7 @@ A plain HTML, CSS and JavaScript site with no build step. Open `index.html` in a
 
 - **Break it slowly**: the opening. As you scroll, a chocolate chip cookie splits open. It floats on the page with
   its crumbs: the clip was cut out of its background and saved as transparent frames (`assets/frames/00.webp` to
-  `55.webp`), drawn one by one as you scroll. It stops while both halves are still in view.
+  `49.webp`), drawn one by one as you scroll. It stops while both halves are still in view, and "Love at first bite" fades in between them.
 - **Menu**: tap a treat to see its photo, prices and an "Order this on WhatsApp" button with the message pre-filled.
 - **Build your order**: under the menu, customers pick how many of each treat they want and get an automatic quote.
   The button sends the whole order, with the total, to Nasreen on WhatsApp.

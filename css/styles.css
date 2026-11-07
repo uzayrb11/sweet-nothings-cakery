@@ -59,9 +59,11 @@ h1, h2, h3, p { margin: 0; }
 /* The opening: the cookie breaks open as you scroll */
 .break { position: relative; height: 220vh; }
 .break__pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.break__media { position: absolute; margin: 0; right: clamp(16px, 3vw, 56px); top: 50%; transform: translateY(-50%); width: min(58vw, 900px); aspect-ratio: 900 / 594; }
+.break__media { position: absolute; margin: 0; right: clamp(16px, 3vw, 56px); top: 50%; transform: translateY(-50%); width: min(58vw, 900px); aspect-ratio: 900 / 649; container-type: inline-size; }
 /* the cookie floats on the page: a soft shadow is all that sits under it */
 .break__canvas { width: 100%; height: 100%; display: block; filter: drop-shadow(0 26px 30px rgba(125,22,25,.18)); }
+/* "Love at first bite" fades in between the two halves as they part (the clip's own line, set in the brand script) */
+.break__love { position: absolute; left: 46.7%; top: 50%; transform: translate(-50%, -50%) scale(calc(.9 + .1 * var(--love, 0))); margin: 0; text-align: center; font-family: var(--hand); font-size: 7.2cqi; line-height: .95; color: var(--berry); white-space: nowrap; opacity: var(--love, 0); pointer-events: none; }
 .break__text { position: absolute; left: clamp(24px, 5vw, 88px); top: 50%; transform: translateY(-46%); width: min(500px, 34vw); display: flex; flex-direction: column; gap: 18px; z-index: 2; }
 .break__title { font-family: var(--serif); font-weight: 600; font-size: clamp(56px, 6.6vw, 112px); line-height: .92; letter-spacing: -.025em; color: var(--berry); }
 .break__title span { display: block; font-family: var(--hand); font-weight: 400; font-size: 1.05em; line-height: .95; letter-spacing: 0; color: var(--script); }

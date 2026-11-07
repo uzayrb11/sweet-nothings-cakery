@@ -10,19 +10,10 @@ A plain HTML, CSS and JavaScript site with no build step. Open `index.html` in a
 - **Break it slowly**: the opening. As you scroll, a chocolate chip cookie splits open. It floats on the page with
   its crumbs: the clip was cut out of its background and saved as transparent frames (`assets/frames/00.webp` to
   `55.webp`), drawn one by one as you scroll. It stops while both halves are still in view.
-- **One stream of chocolate**: then the chocolate pours out of the cookie and keeps going, as one unbroken stream,
-  down the whole page. It runs down the sides, sweeps across the gap between each section to the other side, drips a
-  little as it goes, and pools at the very bottom. Its front follows your scroll.
 - **Menu**: tap a treat to see its photo, prices and an "Order this on WhatsApp" button with the message pre-filled.
 - **How to order**, **Meet Nasreen**, and the WhatsApp (084 868 7123) and Instagram (@sweetnothingscakery_) links.
 
-## How the chocolate is drawn
-
-The stream is an SVG path built in `js/main.js` (`buildFlow`) from the real positions of the sections, so it always
-crosses in the empty space between them, never over a heading. It is shaded in layers (rim, body, sheen, highlight)
-with colours sampled from the clip's chocolate. `SPOUT` is where it leaves the cookie in the last frame.
-
-People who have turned on "reduce motion" see the cookie already broken and the whole stream at once.
+People who have turned on "reduce motion" see the cookie already broken.
 
 ## Colours and type
 

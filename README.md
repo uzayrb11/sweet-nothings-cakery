@@ -26,8 +26,9 @@ Headlines in Playfair Display, accent words in Alex Brush, labels in Nunito Sans
 
 The rules live at the top of `js/quote.js`:
 
-- Cookies are sold in half dozens: R100 for 6, R180 for 12. Flavours can be mixed, so the price is worked out on
-  all the cookies together (6 Chocolate Chip + 6 Red Velvet = one dozen, R180).
+- Cookies come in boxes of 6 (R100) and 12 (R180). Customers pick single cookies to build mixed boxes; the total
+  must fill whole boxes of 6, and the price is worked out on all the cookies together (6 Chocolate Chip + 6 Red
+  Velvet = one dozen, R180; 4 + 4 + 4 = one dozen, R180).
 - Minimum 6 cookies when cookies are ordered.
 - Brownie bites: R80 a box of 32; chocolate sauce R5 extra per box.
 - Collection is free. Delivery in Joburg South, measured by road from the bakery: R30 for the first

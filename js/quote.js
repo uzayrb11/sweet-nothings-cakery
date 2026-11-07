@@ -1,8 +1,9 @@
 // Sweet Nothings Cakery: the order form and its automatic quote.
 //
 // Pricing rules:
-// - Cookies (Chocolate Chip, Double Chocolate Chip, Red Velvet Chocolate Chip) come in half dozens:
-//   R100 for 6, R180 for 12. Flavours can be mixed, so the price is worked out on all the cookies together:
+// - Cookies (Chocolate Chip, Double Chocolate Chip, Red Velvet Chocolate Chip) come in boxes of 6 (R100) and 12 (R180).
+//   Customers pick single cookies of each flavour to build mixed boxes, but the total has to fill whole boxes of 6
+//   (6, 12, 18 ...). The price is worked out on all the cookies together:
 //   6 Chocolate Chip + 6 Red Velvet is one dozen, R180. Every full dozen is R180 and a leftover half dozen is R100.
 // - Minimum of 6 cookies when cookies are ordered.
 // - Brownie bites: R80 a box of 32. Chocolate sauce is R5 extra per box.
@@ -53,12 +54,16 @@
       const n = qty[it.id] || 0;
       if (!n) return;
       cookies += n;
-      lines.push({ id: it.id, name: it.name, detail: n + " cookies", price: null, part: true });
+      lines.push({ id: it.id, name: it.name, detail: n + (n === 1 ? " cookie" : " cookies"), price: null, part: true });
     });
+    const short = cookies % 6 ? 6 - (cookies % 6) : 0; // cookies still needed to fill the last box
     if (cookies) {
-      const price = cookiePrice(cookies);
-      total += price;
-      lines.push({ id: "cookies", name: "Cookies" + (lines.length > 1 ? ", mixed" : ""), detail: cookies + " cookies (" + boxWords(cookies) + ")", price, sum: true });
+      const name = "Cookies" + (lines.length > 1 ? ", mixed" : "");
+      if (!short) {
+        const price = cookiePrice(cookies);
+        total += price;
+        lines.push({ id: "cookies", name, detail: cookies + " cookies (" + boxWords(cookies) + ")", price, sum: true });
+      } else lines.push({ id: "cookies", name, detail: cookies + " cookies: " + short + " more to fill your box", price: null, sum: true, short });
     }
     const boxes = qty.bb || 0;
     if (boxes) {
@@ -81,9 +86,10 @@
     if ((cookies || boxes) && how === "courier") lines.push({ id: "courier", name: "Courier", detail: "fee quoted by Nasreen", price: null });
     const problems = [];
     if (!cookies && !boxes) problems.push("Choose at least one treat.");
-    else if (cookies > 0 && cookies < MIN_COOKIES) problems.push("The minimum order is " + MIN_COOKIES + " cookies.");
+    else if (cookies > 0 && cookies < MIN_COOKIES) problems.push("The minimum order is " + MIN_COOKIES + " cookies. Add " + (MIN_COOKIES - cookies) + " more.");
+    else if (short) problems.push("Cookies come in boxes of 6. Add " + short + " more " + (short === 1 ? "cookie" : "cookies") + " to fill your box, or remove " + (6 - short) + ".");
     if (deliveryProblem && (cookies || boxes)) problems.push(deliveryProblem);
-    return { lines, total, cookies, boxes, ok: problems.length === 0, problems };
+    return { lines, total, cookies, boxes, short, ok: problems.length === 0, problems };
   }
 
   const api = { PRICES, DELIVERY, MIN_COOKIES, BITES_PER_BOX, ITEMS, cookiePrice, boxWords, deliveryFee, quote };

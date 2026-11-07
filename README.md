@@ -30,7 +30,7 @@ The rules live at the top of `js/quote.js`:
   all the cookies together (6 Chocolate Chip + 6 Red Velvet = one dozen, R180).
 - Minimum 6 cookies when cookies are ordered.
 - Brownie bites: R80 a box of 32; chocolate sauce R5 extra per box.
-- Collection is free. Delivery in Joburg South, measured by road from 9 Berwyn Road, Evans Park: R30 for the first
+- Collection is free. Delivery in Joburg South, measured by road from the bakery: R30 for the first
   3 km, then R5 per extra km, up to 6 km by road (R45 at most). The customer finds their address on a map
   (OpenStreetMap search and routing, no keys needed) and the fee is added to the quote. A courier further
   away is quoted by Nasreen and is not added to the total.

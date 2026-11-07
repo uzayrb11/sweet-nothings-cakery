@@ -7,13 +7,13 @@
 // - Minimum of 6 cookies when cookies are ordered.
 // - Brownie bites: R80 a box of 32. Chocolate sauce is R5 extra per box.
 // - Collection is free.
-// - Delivery in Joburg South, from 9 Berwyn Road, Evans Park: R30 for the first 3 km by road, then R5 for every
+// - Delivery in Joburg South, measured by road from the bakery: R30 for the first 3 km, then R5 for every
 //   extra km (part of a km counts as a km), up to 6 km by road. Further than that: courier.
 //   The customer finds their address on the map; the driving distance and time come from OpenStreetMap routing.
 // - A courier further away is quoted by Nasreen, so it is not added to the total.
 (function () {
   const PRICES = { half: 100, dozen: 180, brownieBox: 80, sauce: 5 };
-  const DELIVERY = { base: 30, baseKm: 3, perKm: 5, maxKm: 6, from: { lat: -26.24523, lng: 28.00299 } };
+  const DELIVERY = { base: 30, baseKm: 3, perKm: 5, maxKm: 6, from: { lat: -26.245, lng: 28.003 } };
   const MIN_COOKIES = 6;
   const BITES_PER_BOX = 32;
   const ITEMS = [

@@ -248,7 +248,6 @@ h1, h2, h3, p { margin: 0; }
   .break__text { position: relative; inset: auto; padding: 0 4px; order: -1; }
   .break__media { position: relative; inset: auto; width: 100%; transform: none; }
   .break__actions { display: none; }
-  .halaal img { width: 70px; }
   .menu__grid { grid-template-columns: 1fr; }
   .quote__grid { grid-template-columns: 1fr; }
   .quote__how { grid-template-columns: 1fr; }
